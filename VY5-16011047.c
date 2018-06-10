@@ -70,7 +70,7 @@ void printStackBuffer(Stack *s, char* buff){
 
 
 int shunting_yard(char *input, int *variables){
-	// copy of given text 
+    // copy of given text 
     char *statement = strdup(input);
     // priority array for operators
     static char priority[8] = {0,0,2,1,0,1,0,2};
@@ -100,23 +100,23 @@ int shunting_yard(char *input, int *variables){
                         printStackBuffer(&values,result);
                         
                         //evaluate the expression until encounter to a parenthesis
-				        push(&values, evaluate(pop(&values),pop(&values),pop(&ops)));
+			push(&values, evaluate(pop(&values),pop(&values),pop(&ops)));
                         
-						printf("Postfix:%-20s",postfix);
-				        printStack(&ops);
+			printf("Postfix:%-20s",postfix);
+			printStack(&ops);
                     }
                     pop(&ops);
                 }else{
-                	// pop until there is no higher priority operator than you
+		    // pop until there is no higher priority operator than you
                     while(!isEmpty(&ops) && priority[OP2PRIORTY(peak(&ops))]>=priority[OP2PRIORTY(*op)]){
                         snprintf(postfix+strlen(postfix),STACKLIMIT*2-strlen(postfix),"%c",peak(&ops));
                         printStackBuffer(&values,result);
                         
                         //evaluate the expression
-				        push(&values, evaluate(pop(&values),pop(&values),pop(&ops)));
-                        
-				        printf("Postfix:%-20s",postfix);
-				        printStack(&ops);
+			push(&values, evaluate(pop(&values),pop(&values),pop(&ops)));
+
+			printf("Postfix:%-20s",postfix);
+			printStack(&ops);
                     }
                     push(&ops,*op);
                 }
@@ -130,7 +130,7 @@ int shunting_yard(char *input, int *variables){
             printStackBuffer(&values,result);
             
         	// if it's a number
-			push(&values,atoi(op));
+	    push(&values,atoi(op));
             
             snprintf(postfix+strlen(postfix),STACKLIMIT*2 - strlen(postfix),"%d",peak(&values));
         }
@@ -143,9 +143,9 @@ int shunting_yard(char *input, int *variables){
 	// empty stack if there is left any operator
     while(!isEmpty(&ops)){
         snprintf(postfix+strlen(postfix),STACKLIMIT*2-strlen(postfix),"%c",peak(&ops));
-		printStackBuffer(&values,result);
+	printStackBuffer(&values,result);
 		
-		//evaluate the expression
+	//evaluate the expression
         push(&values, evaluate(pop(&values),pop(&values),pop(&ops)));
     }
 
@@ -158,7 +158,7 @@ int shunting_yard(char *input, int *variables){
 
 
 int main(int argc, char const *argv[]){
-	// variable value array
+    // variable value array
     int variables[52] = {0};
     // buffer to read lines
     char buffer[STACKLIMIT*2];
